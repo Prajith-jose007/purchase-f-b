@@ -79,7 +79,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     try {
       const results = await Promise.allSettled([
         fetchApiDataInternal<{ branches: Branch[] }>('/api/app-data/branches').then(data => data.branches),
-        fetchApiDataInternal<User[]>('/api/app-data/users'), // API already strips passwords
+        fetchApiDataInternal<User[]>('/api/app-data/users'), 
         fetchApiDataInternal<{ inventory: Item[] }>('/api/app-data/inventory').then(data => data.inventory),
         fetchApiDataInternal<{ orders: Order[] }>('/api/app-data/orders').then(data => data.orders),
       ]);
@@ -138,7 +138,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     } catch (error) {
       console.error("AppContext: Critical error during initial data load (wrapper):", error);
-      // Set defaults on critical failure
       setBranchesDataState([]); setUsersDataState([]); setInventoryState([]); setOrdersState([]);
       setCurrentUserState(null); setCurrentBranchState(null);
       if (attempt < 3) {
@@ -316,3 +315,5 @@ export const useAppContext = (): AppContextType => {
   }
   return context;
 };
+
+    

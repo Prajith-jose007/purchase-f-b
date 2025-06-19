@@ -201,3 +201,5 @@ export default function InventoryTable({ items }: InventoryTableProps) {
     </div>
   );
 }
+
+    

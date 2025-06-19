@@ -108,10 +108,10 @@ async function ensureDatabaseExists() {
   try {
     console.log('Attempting to connect to MySQL server to check/create database...');
     connection = await mysql.createConnection(dbConfig);
-    await connection.query(`CREATE DATABASE IF NOT EXISTS \`${dbName}\`;`);
-    console.log(`Database '${dbName}' ensured.`);
+    await connection.query(\`CREATE DATABASE IF NOT EXISTS \`${dbName}\`;\`);
+    console.log(\`Database '\${dbName}' ensured.\`);
   } catch (error) {
-    console.error(`Error ensuring database '${dbName}' exists:`, error);
+    console.error(\`Error ensuring database '\${dbName}' exists:\`, error);
     throw error;
   } finally {
     if (connection) {
@@ -123,17 +123,17 @@ async function ensureDatabaseExists() {
 async function createTables() {
   let connection: mysql.Connection | null = null;
   try {
-    console.log(`Attempting to connect to database '${dbName}' to create tables...`);
+    console.log(\`Attempting to connect to database '\${dbName}' to create tables...\`);
     connection = await mysql.createConnection(dbConfigWithDb);
     console.log('Connected to database. Creating tables...');
     for (const schema of tableSchemas) {
-      const tableNameMatch = schema.match(/CREATE TABLE IF NOT EXISTS (\w+)/);
+      const tableNameMatch = schema.match(/CREATE TABLE IF NOT EXISTS (\\w+)/);
       const tableName = tableNameMatch ? tableNameMatch[1] : 'unknown table';
       try {
         await connection.query(schema);
-        console.log(`Table '${tableName}' ensured (created if not exists).`);
+        console.log(\`Table '\${tableName}' ensured (created if not exists).\`);
       } catch (tableError) {
-        console.error(`Error creating table '${tableName}':`, (tableError as Error).message);
+        console.error(\`Error creating table '\${tableName}':\`, (tableError as Error).message);
         // Decide if you want to throw or continue
       }
     }
@@ -151,26 +151,26 @@ async function createTables() {
 async function seedData() {
   let connection: mysql.Connection | null = null;
   try {
-    console.log(`Attempting to connect to database '${dbName}' for seeding...`);
+    console.log(\`Attempting to connect to database '\${dbName}' for seeding...\`);
     connection = await mysql.createConnection(dbConfigWithDb);
     console.log('Connected to database. Seeding initial data...');
     for (const sql of seedSql) {
-       const actionMatch = sql.match(/INSERT IGNORE INTO (\w+)/);
-       const actionTable = actionMatch ? `table '${actionMatch[1]}'` : 'item';
+       const actionMatch = sql.match(/INSERT IGNORE INTO (\\w+)/);
+       const actionTable = actionMatch ? \`table '\${actionMatch[1]}'\` : 'item';
       try {
         const [result] = await connection.query(sql) as mysql.ResultSetHeader[];
         if (result.affectedRows > 0) {
-          console.log(`Seeded ${actionTable}.`);
+          console.log(\`Seeded \${actionTable}.\`);
         } else {
-          console.log(`Skipped seeding for ${actionTable} (already exists or no change).`);
+          console.log(\`Skipped seeding for \${actionTable} (already exists or no change).\`);
         }
       } catch (seedError) {
-         console.error(`Error seeding ${actionTable}:`, (seedError as Error).message);
+         console.error(\`Error seeding \${actionTable}:\`, (seedError as Error).message);
       }
     }
     console.log('Initial data seeding completed.');
-    console.warn("\nIMPORTANT: Seeded users have default passwords.");
-    console.warn("These should be changed in a production environment or if security is a concern.\n");
+    console.warn("\\nIMPORTANT: Seeded users have default passwords.");
+    console.warn("These should be changed in a production environment or if security is a concern.\\n");
   } catch (error) {
     console.error('Error seeding data:', error);
     throw error;
@@ -195,3 +195,5 @@ async function main() {
 }
 
 main();
+
+    

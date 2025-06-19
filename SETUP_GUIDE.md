@@ -86,3 +86,5 @@ This guide outlines the software and steps required to run this Next.js applicat
     *   Check the server-side terminal (where `npm run dev` is running) for specific error messages logged by `src/actions/userActions.ts`.
 
 By following these steps, including the automated database setup, you should be able to run the application locally with a properly initialized database.
+
+    
