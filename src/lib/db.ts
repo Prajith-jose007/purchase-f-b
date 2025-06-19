@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS branches (
 CREATE TABLE IF NOT EXISTS users (
   id VARCHAR(191) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  username VARCHAR(191) NOT NULL UNIQUE,
+  username VARCHAR(191) NOT NULL UNIQUE, -- Max length 191 for utf8mb4 compatibility
   password VARCHAR(255) NOT NULL, -- NOTE: Seeded passwords are for dev only!
   branch_id VARCHAR(191),
   role ENUM('employee', 'purchase_manager') NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 CREATE TABLE IF NOT EXISTS inventory (
-  code VARCHAR(191) PRIMARY KEY,
+  code VARCHAR(191) PRIMARY KEY, -- Max length 191 for utf8mb4 compatibility
   remark VARCHAR(255),
   type VARCHAR(255) NOT NULL,
   category VARCHAR(255) NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS inventory (
 );
 
 CREATE TABLE IF NOT EXISTS orders (
-  id VARCHAR(191) PRIMARY KEY,
+  id VARCHAR(191) PRIMARY KEY, -- Max length 191 for utf8mb4 compatibility
   branch_id VARCHAR(191) NOT NULL,
   user_id VARCHAR(191) NOT NULL,
   status ENUM('Pending', 'Approved', 'Processing', 'Shipped', 'Delivered', 'Cancelled') NOT NULL,

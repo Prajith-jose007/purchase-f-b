@@ -92,13 +92,11 @@ const seedSql = [
   `INSERT IGNORE INTO branches (id, name) VALUES ('branch-new', 'New Outlet Sharjah');`,
 
   // Users
-  // IMPORTANT: These are default passwords for development convenience.
-  // They should be changed immediately in a real environment or managed via a secure user creation process.
   `INSERT IGNORE INTO users (id, name, username, password, role) VALUES ('pm001', 'Procurement Head', 'manager', 'manager', 'purchase_manager');`,
   `INSERT IGNORE INTO users (id, name, username, password, branch_id, role) VALUES ('emp001', 'Store Keeper Alpha', 'employee1', 'employee1', 'branch-main', 'employee');`,
   `INSERT IGNORE INTO users (id, name, username, password, branch_id, role) VALUES ('emp002', 'Store Keeper Beta', 'employee2', 'employee2', 'branch-satellite', 'employee');`,
   `INSERT IGNORE INTO users (id, name, username, password, branch_id, role) VALUES ('emp003', 'New Staff Gamma', 'employee3', 'employee3', 'branch-new', 'employee');`,
-  // New users
+  // New users as per request
   `INSERT IGNORE INTO users (id, name, username, password, role) VALUES ('admin001', 'System Administrator', 'admin', 'Dutch@989#', 'purchase_manager');`,
   `INSERT IGNORE INTO users (id, name, username, password, role) VALUES ('purchase001', 'Purchase User', 'purchase', 'Dutch@123#', 'purchase_manager');`,
   `INSERT IGNORE INTO users (id, name, username, password, branch_id, role) VALUES ('store001', 'Store User', 'store', 'Dutch@123#', 'branch-main', 'employee');`
@@ -197,4 +195,3 @@ async function main() {
 }
 
 main();
-
