@@ -42,7 +42,7 @@ const tableSchemas = [
   `CREATE TABLE IF NOT EXISTS users (
     id VARCHAR(191) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    username VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(191) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     branch_id VARCHAR(191),
     role ENUM('employee', 'purchase_manager') NOT NULL,
