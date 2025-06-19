@@ -1,5 +1,5 @@
 
-# Firebase Studio - Culinary Compass
+# Project - Purchase F&B Ordering System
 
 This is a NextJS starter application for managing restaurant supply orders, named Culinary Compass. It's designed to be used with Firebase Studio.
 
