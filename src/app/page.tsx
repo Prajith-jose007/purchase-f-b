@@ -43,7 +43,7 @@ export default function LoginPage() {
         });
         // Redirect is handled by the useEffect hook
       } else {
-        // This case might not be reached if loginUserAction throws for invalid credentials based on its current implementation
+        // This case implies user was null, meaning username/password didn't match
         toast({
           title: "Login Failed",
           description: "Invalid username or password.",
@@ -51,6 +51,7 @@ export default function LoginPage() {
         });
       }
     } catch (error) {
+      // This catch block handles errors thrown by loginUserAction (e.g., database connection issues)
       console.error("Login page error:", error);
       toast({
         title: "Login Error",
