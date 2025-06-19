@@ -36,20 +36,20 @@ const dbConfigWithDb = {
 
 const tableSchemas = [
   `CREATE TABLE IF NOT EXISTS branches (
-    id VARCHAR(255) PRIMARY KEY,
+    id VARCHAR(191) PRIMARY KEY,
     name VARCHAR(255) NOT NULL
   );`,
   `CREATE TABLE IF NOT EXISTS users (
-    id VARCHAR(255) PRIMARY KEY,
+    id VARCHAR(191) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    branch_id VARCHAR(255),
+    branch_id VARCHAR(191),
     role ENUM('employee', 'purchase_manager') NOT NULL,
     FOREIGN KEY (branch_id) REFERENCES branches(id) ON DELETE SET NULL
   );`,
   `CREATE TABLE IF NOT EXISTS inventory (
-    code VARCHAR(255) PRIMARY KEY,
+    code VARCHAR(191) PRIMARY KEY,
     remark VARCHAR(255),
     type VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
@@ -58,9 +58,9 @@ const tableSchemas = [
     packing DECIMAL(10, 2) NOT NULL
   );`,
   `CREATE TABLE IF NOT EXISTS orders (
-    id VARCHAR(255) PRIMARY KEY,
-    branch_id VARCHAR(255) NOT NULL,
-    user_id VARCHAR(255) NOT NULL,
+    id VARCHAR(191) PRIMARY KEY,
+    branch_id VARCHAR(191) NOT NULL,
+    user_id VARCHAR(191) NOT NULL,
     status ENUM('Pending', 'Approved', 'Processing', 'Shipped', 'Delivered', 'Cancelled') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -69,15 +69,15 @@ const tableSchemas = [
   );`,
   `CREATE TABLE IF NOT EXISTS order_items (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id VARCHAR(255) NOT NULL,
-    item_code VARCHAR(255) NOT NULL,
+    order_id VARCHAR(191) NOT NULL,
+    item_code VARCHAR(191) NOT NULL,
     quantity INT NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
     FOREIGN KEY (item_code) REFERENCES inventory(code)
   );`,
   `CREATE TABLE IF NOT EXISTS order_invoices (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id VARCHAR(255) NOT NULL,
+    order_id VARCHAR(191) NOT NULL,
     file_name VARCHAR(255) NOT NULL,
     data_url LONGTEXT,
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
